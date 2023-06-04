@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.proyecto.foodie.form.LoginForm;
 import com.proyecto.foodie.model.Platos;
 import com.proyecto.foodie.repository.AdminRepository;
 import com.proyecto.foodie.repository.ClienteRepository;
@@ -29,7 +30,7 @@ public class FoodieController {
 	private PlatosRepository platosRepository;
 	
 	@GetMapping("/")
-	public String login(Model model, HttpServletRequest request) {
+	public String index(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
 		Iterable<Platos> itPlatos = platosRepository.findAll();
@@ -38,5 +39,10 @@ public class FoodieController {
 	    model.addAttribute("listaPlatos", listaPlatos);
 	    
 		return "index";
+	}
+	
+	@GetMapping("/login")
+	public String login(LoginForm loginForm) {
+		return "login";
 	}
 }

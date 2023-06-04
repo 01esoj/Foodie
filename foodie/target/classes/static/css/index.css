@@ -7,6 +7,15 @@ body {
 	font-size: 20px;
 }
 
+li a {
+	color: grey;
+	text-decoration: none;
+}
+
+li a:hover {
+    color: orange;
+}
+
 .carousel-caption {
 	bottom: 4rem;
 	z-index: 10;
@@ -62,11 +71,27 @@ body {
 	transform: skew(20deg, 0deg) scale(1.2);
 }
 
-.foodie {
+.oferta1 {
 	background-image: url('/img/oferta1.jpg');
 	background-size: cover;
 	background-position: center;
 	height: 100%;
+}
+
+.oferta2 {
+	background-image: url('/img/oferta2.jpg');
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+}
+
+.card-body h4 {
+	font-weight: bold;
+}
+
+.btn-outline-secondary:hover{
+	background-color: orange;
+    color: white;	
 }
 
 @media ( min-width : 40em) {
