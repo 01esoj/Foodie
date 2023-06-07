@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -15,8 +17,11 @@ import jakarta.persistence.MappedSuperclass;
 public class Usuarios {
 	
 	@Id
-	private String dniUsuario;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idUsuario;
 	
+	@Column(unique=true)
+	private String dniUsuario;
 	private String nombreUsuario;
 	private String apellidosUsuario;
 	@Column(unique=true)
@@ -42,43 +47,51 @@ public class Usuarios {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public String getdniUsuario() {
+	public Integer getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(Integer idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getDniUsuario() {
 		return dniUsuario;
 	}
 
-	public void setdniUsuario(String dniUsuario) {
+	public void setDniUsuario(String dniUsuario) {
 		this.dniUsuario = dniUsuario;
 	}
 
-	public String getnombreUsuario() {
+	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
 
-	public void setnombreUsuario(String nombreUsuario) {
+	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getapellidosUsuario() {
+	public String getApellidosUsuario() {
 		return apellidosUsuario;
 	}
 
-	public void setapellidosUsuario(String apellidosUsuario) {
+	public void setApellidosUsuario(String apellidosUsuario) {
 		this.apellidosUsuario = apellidosUsuario;
 	}
 
-	public int gettelefonoUsuario() {
+	public int getTelefonoUsuario() {
 		return telefonoUsuario;
 	}
 
-	public void settelefonoUsuario(int telefonoUsuario) {
+	public void setTelefonoUsuario(int telefonoUsuario) {
 		this.telefonoUsuario = telefonoUsuario;
 	}
 
-	public String getcorreoElectronico() {
+	public String getCorreoElectronico() {
 		return correoElectronico;
 	}
 
-	public void setcorreoElectronico(String correoElectronico) {
+	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
 
@@ -90,14 +103,14 @@ public class Usuarios {
 		this.contrasena = contrasena;
 	}
 
-	public String gettipoUsuario() {
+	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
 
-	public void settipoUsuario(String tipoUsuario) {
+	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
+
 	public List<Platos> getListaPlatos() {
 		return listaPlatos;
 	}
@@ -108,8 +121,9 @@ public class Usuarios {
 
 	@Override
 	public String toString() {
-		return "Usuarios [dniUsuario=" + dniUsuario + ", nombreUsuario=" + nombreUsuario + ", apellidosUsuario="
-				+ apellidosUsuario + ", telefonoUsuario=" + telefonoUsuario + ", correoElectronico="
-				+ correoElectronico + ", contrasena=" + contrasena + ", tipoUsuario=" + tipoUsuario + "]";
+		return "Usuarios [idUsuario=" + idUsuario + ", dniUsuario=" + dniUsuario + ", nombreUsuario=" + nombreUsuario
+				+ ", apellidosUsuario=" + apellidosUsuario + ", telefonoUsuario=" + telefonoUsuario
+				+ ", correoElectronico=" + correoElectronico + ", contrasena=" + contrasena + ", tipoUsuario="
+				+ tipoUsuario + "]";
 	}
 }

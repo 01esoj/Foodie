@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -13,7 +15,8 @@ import jakarta.persistence.ManyToMany;
 public class Platos {
 	
 	@Id
-	private int idPlato;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idPlato;
 	
 	private String nombrePlato;
 	private double precioPlato;
@@ -43,19 +46,18 @@ public class Platos {
 	
 	public Platos() {}
 	
-	public Platos(int idPlato, String nombrePlato, double precioPlato, String categoria, String descripcion) {
-		this.idPlato = idPlato;
+	public Platos(String nombrePlato, double precioPlato, String categoria, String descripcion) {
 		this.nombrePlato = nombrePlato;
 		this.precioPlato = precioPlato;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 	}
 
-	public int getIdPlato() {
+	public Integer getIdPlato() {
 		return idPlato;
 	}
 
-	public void setIdPlato(int idPlato) {
+	public void setIdPlato(Integer idPlato) {
 		this.idPlato = idPlato;
 	}
 

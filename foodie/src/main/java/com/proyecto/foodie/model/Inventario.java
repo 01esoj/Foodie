@@ -13,7 +13,7 @@ public class Inventario {
 	@Id
 	private int idIngrediente;
 	
-	private double cantidad;
+	private int cantidad;
 	private double precioCompra;
 	private String proveedor;
 	
@@ -22,7 +22,7 @@ public class Inventario {
 	
 	public Inventario() {}
 
-	public Inventario(int idIngrediente, double cantidad, double precioCompra, String proveedor) {
+	public Inventario(int idIngrediente, int cantidad, double precioCompra, String proveedor) {
 		this.idIngrediente = idIngrediente;
 		this.cantidad = cantidad;
 		this.precioCompra = precioCompra;
@@ -37,11 +37,11 @@ public class Inventario {
 		this.idIngrediente = idIngrediente;
 	}
 
-	public double getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(double cantidad) {
+	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 

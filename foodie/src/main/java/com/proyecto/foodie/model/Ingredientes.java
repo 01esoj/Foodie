@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -13,7 +15,8 @@ import jakarta.persistence.ManyToOne;
 public class Ingredientes {
 	
 	@Id
-	private int idIngrediente;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idIngrediente;
 	
 	private String nombreIngrediente;
 	private double precioUnitario;
@@ -27,17 +30,16 @@ public class Ingredientes {
 	
 	public Ingredientes() {}
 
-	public Ingredientes(int idIngrediente, String nombreIngrediente, double precioUnitario) {
-		this.idIngrediente = idIngrediente;
+	public Ingredientes(String nombreIngrediente, double precioUnitario) {
 		this.nombreIngrediente = nombreIngrediente;
 		this.precioUnitario = precioUnitario;
 	}
 
-	public int getIdIngrediente() {
+	public Integer getIdIngrediente() {
 		return idIngrediente;
 	}
 
-	public void setIdIngrediente(int idIngrediente) {
+	public void setIdIngrediente(Integer idIngrediente) {
 		this.idIngrediente = idIngrediente;
 	}
 

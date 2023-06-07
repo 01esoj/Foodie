@@ -26,6 +26,6 @@ public class Admin extends Usuarios{
 
 	@Override
 	public String toString() {
-		return "Admin [dniUsuario=" + getdniUsuario() + ", historial=" + historial + "]";
+		return "Admin [dniUsuario=" + getDniUsuario() + ", historial=" + historial + "]";
 	}
 }

@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -11,6 +13,10 @@ import jakarta.persistence.OneToMany;
 public class Cliente {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idCliente;
+	
+	@Column(unique=true)
 	private String dniCliente;
 	
 	private String nombreCliente;
@@ -37,6 +43,14 @@ public class Cliente {
 		this.correoElectronico = correoElectronico;
 		this.contrasena = contrasena;
 		this.tarjetaCredito = tarjetaCredito;
+	}
+	
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public String getDniCliente() {
@@ -71,11 +85,11 @@ public class Cliente {
 		this.telefonoCliente = telefonoCliente;
 	}
 
-	public String getCorreo_electronico() {
+	public String getCorreoElectronico() {
 		return correoElectronico;
 	}
 
-	public void setCorreo_electronico(String correoElectronico) {
+	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
 
@@ -106,8 +120,10 @@ public class Cliente {
 
 	@Override
 	public String toString() {
-		return "Cliente [dniCliente=" + dniCliente + ", nombreCliente=" + nombreCliente + ", apellidosCliente="
-				+ apellidosCliente + ", telefonoCliente=" + telefonoCliente + ", correoElectronico="
-				+ correoElectronico + ", contrasena=" + contrasena + ", tarjetaCredito=" + tarjetaCredito + "]";
+		return "Cliente [idCliente=" + idCliente + ", dniCliente=" + dniCliente + ", nombreCliente=" + nombreCliente
+				+ ", apellidosCliente=" + apellidosCliente + ", telefonoCliente=" + telefonoCliente
+				+ ", correoElectronico=" + correoElectronico + ", contrasena=" + contrasena + ", tarjetaCredito="
+				+ tarjetaCredito + "]";
 	}
+	
 }

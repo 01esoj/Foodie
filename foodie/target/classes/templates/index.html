@@ -28,12 +28,13 @@
 				<li><a href="/" class="px-5">Menú</a></li>
 				<li><a href="#" class="px-5">Pedidos</a></li>
 				<li><a href="#" class="px-5">Promociones</a></li>
-				<li><a href="#" class="px-5">Puntos</a></li>
+				<li th:if="${session.correo != null}"><a href="/profile" class="px-5">Perfil</a></li>
 			</ul>
 
 			<div class="col-md-3 text-end">
-				<a href="/login" type="button" class="btn btn-outline-primary btn-lg me-2">Iniciar sesión</a>
-				<a href="/signup" type="button" class="btn btn-outline-primary btn-lg me-2">Registrarse</a>
+				<a th:if="${session.correo != null}" href="/logout" type="button" class="btn btn-outline-primary btn-lg me-2">Cerrar sesión</a>
+		        <a th:if="${session.correo == null}" href="/login" type="button" class="btn btn-outline-primary btn-lg me-2">Iniciar sesión</a>
+		        <a th:if="${session.correo == null}" href="/signup" type="button" class="btn btn-outline-primary btn-lg me-2">Registrarse</a>
 			</div>
 		</header>
 

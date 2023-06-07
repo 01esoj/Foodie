@@ -64,7 +64,7 @@ public class FoodieController {
 		
 		if (loginUser != null && loginUser.getContrasena().equals(loginForm.getContrasena())) {
 			session.setAttribute("correo", loginForm.getCorreoElectronico());
-			session.setAttribute("dni", loginUser.getdniUsuario());
+			session.setAttribute("dni", loginUser.getDniUsuario());
 //			if(login.getRol().getRol().equalsIgnoreCase("admin")) {
 //				return "admin";
 //			}else{
@@ -110,5 +110,12 @@ public class FoodieController {
 		model.addAttribute("loginForm", new LoginForm());
 	    session.setAttribute("cuenta", "Cuenta creada éxitosamente");
 	    return "redirect:/login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpServletRequest request) {
+	    HttpSession session = request.getSession();
+	    session.invalidate();
+	    return "redirect:/";
 	}
 }

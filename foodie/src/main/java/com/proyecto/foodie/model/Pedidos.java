@@ -3,6 +3,8 @@ package com.proyecto.foodie.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
@@ -12,7 +14,8 @@ import jakarta.persistence.ManyToOne;
 public class Pedidos {
 	
 	@Id
-	private int numeroPedido;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer numeroPedido;
 	
 	private String direccionEnvio;
 	private double precioTotal;
@@ -27,19 +30,18 @@ public class Pedidos {
 	
 	public Pedidos() {}
 
-	public Pedidos(int numeroPedido, String direccionEnvio, double precioTotal, String metodoPago, Cliente cliente) {
-		this.numeroPedido = numeroPedido;
+	public Pedidos(String direccionEnvio, double precioTotal, String metodoPago, Cliente cliente) {
 		this.direccionEnvio = direccionEnvio;
 		this.precioTotal = precioTotal;
 		this.metodoPago = metodoPago;
 		this.cliente = cliente;
 	}
 
-	public int getNumeroPedido() {
+	public Integer getNumeroPedido() {
 		return numeroPedido;
 	}
 
-	public void setNumeroPedido(int numeroPedido) {
+	public void setNumeroPedido(Integer numeroPedido) {
 		this.numeroPedido = numeroPedido;
 	}
 

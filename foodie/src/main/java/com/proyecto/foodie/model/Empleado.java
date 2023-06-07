@@ -38,7 +38,7 @@ public class Empleado extends Usuarios{
 
 	@Override
 	public String toString() {
-		return "Empleado [dniusuario=" + getdniUsuario() + ", sueldo=" + sueldo + ", fechaContratacion="
+		return "Empleado [dniusuario=" + getDniUsuario() + ", sueldo=" + sueldo + ", fechaContratacion="
 				+ fechaContratacion + "]";
 	}
 }
