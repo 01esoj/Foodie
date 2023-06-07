@@ -33,7 +33,7 @@
 
 			<div class="col-md-3 text-end">
 				<a href="/login" type="button" class="btn btn-outline-primary btn-lg me-2">Iniciar sesión</a>
-				<button type="button" class="btn btn-primary btn-lg">Registrarse</button>
+				<a href="/signup" type="button" class="btn btn-outline-primary btn-lg me-2">Registrarse</a>
 			</div>
 		</header>
 
@@ -78,10 +78,10 @@
 							<img class="foodie m-3 mb-0" style="border-radius: 8%;" src="static/img/oferta1.jpg" th:src="@{/img/oferta1.jpg}"/>
 
 							<div class="card-body">
-								<h4 th:text="${plato.nombre_plato}"></h4>
+								<h4 th:text="${plato.nombrePlato}"></h4>
 								<p class="card-text" th:text="${plato.descripcion}"></p>
 								<div class="d-flex justify-content-center align-items-center">
-									<button type="button" class="btn btn-outline-secondary">Añadir por <p th:text="${plato.precio_plato}"></p></button>
+									<button type="button" class="btn btn-outline-secondary">Añadir por <text th:text="${plato.precioPlato}"></text></button>
 								</div>
 							</div>
 						</div>

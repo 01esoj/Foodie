@@ -13,66 +13,66 @@ import jakarta.persistence.ManyToMany;
 public class Platos {
 	
 	@Id
-	private int id_plato;
+	private int idPlato;
 	
-	private String nombre_plato;
-	private double precio_plato;
+	private String nombrePlato;
+	private double precioPlato;
 	private String categoria;
 	private String descripcion;
 	
 	@JoinTable(
 			name="rel_platos_pedidos", 
-			joinColumns = @JoinColumn(name="id_plato", nullable=false), 
-			inverseJoinColumns = @JoinColumn(name="numero_pedido", nullable = false))
+			joinColumns = @JoinColumn(name="idPlato", nullable=false), 
+			inverseJoinColumns = @JoinColumn(name="numeroPedido", nullable = false))
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Pedidos> listaPedidos;
 	
 	@JoinTable(
 			name="rel_platos_usuarios", 
-			joinColumns = @JoinColumn(name="id_plato", nullable=false), 
-			inverseJoinColumns = @JoinColumn(name="dni_usuario", nullable = false))
+			joinColumns = @JoinColumn(name="idPlato", nullable=false), 
+			inverseJoinColumns = @JoinColumn(name="dniUsuario", nullable = false))
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Usuarios> listaUsuarios;
 	
 	@JoinTable(
 			name="rel_platos_ingredientes", 
-			joinColumns = @JoinColumn(name="id_plato", nullable=false), 
-			inverseJoinColumns = @JoinColumn(name="id_ingrediente", nullable = false))
+			joinColumns = @JoinColumn(name="idPlato", nullable=false), 
+			inverseJoinColumns = @JoinColumn(name="idIngrediente", nullable = false))
 	@ManyToMany(cascade = CascadeType.MERGE)
 	private List<Ingredientes> listaIngredientes;
 	
 	public Platos() {}
 	
-	public Platos(int id_plato, String nombre_plato, double precio_plato, String categoria, String descripcion) {
-		this.id_plato = id_plato;
-		this.nombre_plato = nombre_plato;
-		this.precio_plato = precio_plato;
+	public Platos(int idPlato, String nombrePlato, double precioPlato, String categoria, String descripcion) {
+		this.idPlato = idPlato;
+		this.nombrePlato = nombrePlato;
+		this.precioPlato = precioPlato;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 	}
 
-	public int getId_plato() {
-		return id_plato;
+	public int getIdPlato() {
+		return idPlato;
 	}
 
-	public void setId_plato(int id_plato) {
-		this.id_plato = id_plato;
+	public void setIdPlato(int idPlato) {
+		this.idPlato = idPlato;
 	}
 
-	public String getNombre_plato() {
-		return nombre_plato;
+	public String getNombrePlato() {
+		return nombrePlato;
 	}
 
-	public void setNombre_plato(String nombre_plato) {
-		this.nombre_plato = nombre_plato;
+	public void setNombrePlato(String nombrePlato) {
+		this.nombrePlato = nombrePlato;
 	}
 
-	public double getPrecio_plato() {
-		return precio_plato;
+	public double getPrecioPlato() {
+		return precioPlato;
 	}
 
-	public void setPrecio_plato(double precio_plato) {
-		this.precio_plato = precio_plato;
+	public void setPrecioPlato(double precioPlato) {
+		this.precioPlato = precioPlato;
 	}
 
 	public String getCategoria() {
@@ -117,7 +117,7 @@ public class Platos {
 
 	@Override
 	public String toString() {
-		return "Platos [id_plato=" + id_plato + ", nombre_plato=" + nombre_plato + ", precio_plato=" + precio_plato
+		return "Platos [idPlato=" + idPlato + ", nombrePlato=" + nombrePlato + ", precioPlato=" + precioPlato
 				+ ", categoria=" + categoria + ", descripcion=" + descripcion + "]";
 	}
 }

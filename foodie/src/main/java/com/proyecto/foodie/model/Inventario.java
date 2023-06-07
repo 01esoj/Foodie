@@ -11,10 +11,10 @@ import jakarta.persistence.OneToMany;
 public class Inventario {
 	
 	@Id
-	private int id_ingrediente;
+	private int idIngrediente;
 	
 	private double cantidad;
-	private double preico_compra;
+	private double precioCompra;
 	private String proveedor;
 	
 	@OneToMany(mappedBy="inventario")
@@ -22,19 +22,19 @@ public class Inventario {
 	
 	public Inventario() {}
 
-	public Inventario(int id_ingrediente, double cantidad, double preico_compra, String proveedor) {
-		this.id_ingrediente = id_ingrediente;
+	public Inventario(int idIngrediente, double cantidad, double precioCompra, String proveedor) {
+		this.idIngrediente = idIngrediente;
 		this.cantidad = cantidad;
-		this.preico_compra = preico_compra;
+		this.precioCompra = precioCompra;
 		this.proveedor = proveedor;
 	}
 
-	public int getId_ingrediente() {
-		return id_ingrediente;
+	public int getIdIngrediente() {
+		return idIngrediente;
 	}
 
-	public void setId_ingrediente(int id_ingrediente) {
-		this.id_ingrediente = id_ingrediente;
+	public void setIdIngrediente(int idIngrediente) {
+		this.idIngrediente = idIngrediente;
 	}
 
 	public double getCantidad() {
@@ -45,12 +45,12 @@ public class Inventario {
 		this.cantidad = cantidad;
 	}
 
-	public double getPreico_compra() {
-		return preico_compra;
+	public double getPrecioCompra() {
+		return precioCompra;
 	}
 
-	public void setPreico_compra(double preico_compra) {
-		this.preico_compra = preico_compra;
+	public void setPrecioCompra(double precioCompra) {
+		this.precioCompra = precioCompra;
 	}
 
 	public String getProveedor() {
@@ -71,7 +71,7 @@ public class Inventario {
 
 	@Override
 	public String toString() {
-		return "Inventario [id_ingrediente=" + id_ingrediente + ", cantidad=" + cantidad + ", preico_compra="
-				+ preico_compra + ", proveedor=" + proveedor + "]";
+		return "Inventario [idIngrediente=" + idIngrediente + ", cantidad=" + cantidad + ", precioCompra="
+				+ precioCompra + ", proveedor=" + proveedor + "]";
 	}
 }

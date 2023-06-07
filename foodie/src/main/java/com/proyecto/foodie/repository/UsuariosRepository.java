@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.proyecto.foodie.model.Usuarios;
 
 public interface UsuariosRepository extends JpaRepository<Usuarios, Integer>{
-
+	
+	Usuarios findByCorreoElectronico(String paramCorreoElectronico);
 }

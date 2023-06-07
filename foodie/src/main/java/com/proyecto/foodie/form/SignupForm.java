@@ -1,34 +1,20 @@
-package com.proyecto.foodie.model;
-
-import java.util.List;
+package com.proyecto.foodie.form;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
-@Entity
-public class Cliente {
+public class SignupForm {
 	
-	@Id
 	private String dniCliente;
-	
 	private String nombreCliente;
 	private String apellidosCliente;
-	@Column(unique=true)
 	private int telefonoCliente;
-	@Column(unique=true)
 	private String correoElectronico;
 	private String contrasena;
-	@Column(unique=true)
 	private Long tarjetaCredito;
 	
-	@OneToMany(mappedBy="cliente")
-	private List<Pedidos> listaPedidos;
-	
-	public Cliente() {}
+	public SignupForm() {}
 
-	public Cliente(String dniCliente, String nombreCliente, String apellidosCliente, int telefonoCliente,
+	public SignupForm(String dniCliente, String nombreCliente, String apellidosCliente, int telefonoCliente,
 			String correoElectronico, String contrasena, Long tarjetaCredito) {
 		this.dniCliente = dniCliente;
 		this.nombreCliente = nombreCliente;
@@ -71,11 +57,11 @@ public class Cliente {
 		this.telefonoCliente = telefonoCliente;
 	}
 
-	public String getCorreo_electronico() {
+	public String getCorreoElectronico() {
 		return correoElectronico;
 	}
 
-	public void setCorreo_electronico(String correoElectronico) {
+	public void setCorreoElectronico(String correoElectronico) {
 		this.correoElectronico = correoElectronico;
 	}
 
@@ -94,20 +80,13 @@ public class Cliente {
 	public void setTarjetaCredito(Long tarjetaCredito) {
 		this.tarjetaCredito = tarjetaCredito;
 	}
-	
-	
-	public List<Pedidos> getListaPedidos() {
-		return listaPedidos;
-	}
-
-	public void setListaPedidos(List<Pedidos> listaPedidos) {
-		this.listaPedidos = listaPedidos;
-	}
 
 	@Override
 	public String toString() {
-		return "Cliente [dniCliente=" + dniCliente + ", nombreCliente=" + nombreCliente + ", apellidosCliente="
-				+ apellidosCliente + ", telefonoCliente=" + telefonoCliente + ", correoElectronico="
-				+ correoElectronico + ", contrasena=" + contrasena + ", tarjetaCredito=" + tarjetaCredito + "]";
+		return "SignupForm [dniCliente=" + dniCliente + ", nombreCliente=" + nombreCliente + ", apellidosCliente="
+				+ apellidosCliente + ", telefonoCliente=" + telefonoCliente + ", correoElectronico=" + correoElectronico
+				+ ", contrasena=" + contrasena + ", tarjetaCredito=" + tarjetaCredito + "]";
 	}
+	
+	
 }

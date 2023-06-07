@@ -5,77 +5,81 @@ import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.MappedSuperclass;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuarios {
 	
 	@Id
-	private String dni_usuario;
+	private String dniUsuario;
 	
-	private String nombre_usuario;
-	private String apellidos_usuario;
+	private String nombreUsuario;
+	private String apellidosUsuario;
 	@Column(unique=true)
-	private int telefono_usuario;
+	private int telefonoUsuario;
 	@Column(unique=true)
-	private String correo_electronico;
+	private String correoElectronico;
 	private String contrasena;
-	private String tipo_usuario;
+	private String tipoUsuario;
 	
 	@ManyToMany(mappedBy="listaUsuarios")
 	private List<Platos> listaPlatos;
 	
 	public Usuarios() {}
 
-	public Usuarios(String dni_usuario, String nombre_usuario, String apellidos_usuario, int telefono_usuario,
-			String correo_electronico, String contrasena, String tipo_usuario) {
-		this.dni_usuario = dni_usuario;
-		this.nombre_usuario = nombre_usuario;
-		this.apellidos_usuario = apellidos_usuario;
-		this.telefono_usuario = telefono_usuario;
-		this.correo_electronico = correo_electronico;
+	public Usuarios(String dniUsuario, String nombreUsuario, String apellidosUsuario, int telefonoUsuario,
+			String correoElectronico, String contrasena, String tipoUsuario) {
+		this.dniUsuario = dniUsuario;
+		this.nombreUsuario = nombreUsuario;
+		this.apellidosUsuario = apellidosUsuario;
+		this.telefonoUsuario = telefonoUsuario;
+		this.correoElectronico = correoElectronico;
 		this.contrasena = contrasena;
-		this.tipo_usuario = tipo_usuario;
+		this.tipoUsuario = tipoUsuario;
 	}
 
-	public String getDni_usuario() {
-		return dni_usuario;
+	public String getdniUsuario() {
+		return dniUsuario;
 	}
 
-	public void setDni_usuario(String dni_usuario) {
-		this.dni_usuario = dni_usuario;
+	public void setdniUsuario(String dniUsuario) {
+		this.dniUsuario = dniUsuario;
 	}
 
-	public String getNombre_usuario() {
-		return nombre_usuario;
+	public String getnombreUsuario() {
+		return nombreUsuario;
 	}
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
+	public void setnombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getApellidos_usuario() {
-		return apellidos_usuario;
+	public String getapellidosUsuario() {
+		return apellidosUsuario;
 	}
 
-	public void setApellidos_usuario(String apellidos_usuario) {
-		this.apellidos_usuario = apellidos_usuario;
+	public void setapellidosUsuario(String apellidosUsuario) {
+		this.apellidosUsuario = apellidosUsuario;
 	}
 
-	public int getTelefono_usuario() {
-		return telefono_usuario;
+	public int gettelefonoUsuario() {
+		return telefonoUsuario;
 	}
 
-	public void setTelefono_usuario(int telefono_usuario) {
-		this.telefono_usuario = telefono_usuario;
+	public void settelefonoUsuario(int telefonoUsuario) {
+		this.telefonoUsuario = telefonoUsuario;
 	}
 
-	public String getCorreo_electronico() {
-		return correo_electronico;
+	public String getcorreoElectronico() {
+		return correoElectronico;
 	}
 
-	public void setCorreo_electronico(String correo_electronico) {
-		this.correo_electronico = correo_electronico;
+	public void setcorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 
 	public String getContrasena() {
@@ -86,12 +90,12 @@ public class Usuarios {
 		this.contrasena = contrasena;
 	}
 
-	public String getTipo_usuario() {
-		return tipo_usuario;
+	public String gettipoUsuario() {
+		return tipoUsuario;
 	}
 
-	public void setTipo_usuario(String tipo_usuario) {
-		this.tipo_usuario = tipo_usuario;
+	public void settipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 	
 	public List<Platos> getListaPlatos() {
@@ -104,8 +108,8 @@ public class Usuarios {
 
 	@Override
 	public String toString() {
-		return "Usuarios [dni_usuario=" + dni_usuario + ", nombre_usuario=" + nombre_usuario + ", apellidos_usuario="
-				+ apellidos_usuario + ", telefono_usuario=" + telefono_usuario + ", correo_electronico="
-				+ correo_electronico + ", contrasena=" + contrasena + ", tipo_usuario=" + tipo_usuario + "]";
+		return "Usuarios [dniUsuario=" + dniUsuario + ", nombreUsuario=" + nombreUsuario + ", apellidosUsuario="
+				+ apellidosUsuario + ", telefonoUsuario=" + telefonoUsuario + ", correoElectronico="
+				+ correoElectronico + ", contrasena=" + contrasena + ", tipoUsuario=" + tipoUsuario + "]";
 	}
 }

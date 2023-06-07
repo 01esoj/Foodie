@@ -16,6 +16,16 @@ li a:hover {
     color: orange;
 }
 
+.btn-lg {
+	color: black;
+	border-color: black;
+}
+
+.btn-outline-primary:hover {
+	background-color: orange;
+    color: white;
+}
+
 .carousel-caption {
 	bottom: 4rem;
 	z-index: 10;

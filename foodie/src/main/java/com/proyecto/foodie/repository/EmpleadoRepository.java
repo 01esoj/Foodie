@@ -1,5 +1,6 @@
 package com.proyecto.foodie.repository;
 
-public interface EmpleadoRepository extends UsuariosRepository{
 
+public interface EmpleadoRepository extends UsuariosRepository{
+	
 }

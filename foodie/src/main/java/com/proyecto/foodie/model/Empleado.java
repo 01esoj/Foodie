@@ -8,16 +8,16 @@ import jakarta.persistence.Entity;
 public class Empleado extends Usuarios{
 	
 	private double sueldo;
-	private Date fecha_contratacion;
+	private Date fechaContratacion;
 	
 	public Empleado() {
 		super();
 	}
 
-	public Empleado(double sueldo, Date fecha_contratacion) {
+	public Empleado(double sueldo, Date fechaContratacion) {
 		super();
 		this.sueldo = sueldo;
-		this.fecha_contratacion = fecha_contratacion;
+		this.fechaContratacion = fechaContratacion;
 	}
 
 	public double getSueldo() {
@@ -28,17 +28,17 @@ public class Empleado extends Usuarios{
 		this.sueldo = sueldo;
 	}
 
-	public Date getFecha_contratacion() {
-		return fecha_contratacion;
+	public Date getFechacontratacion() {
+		return fechaContratacion;
 	}
 
-	public void setFecha_contratacion(Date fecha_contratacion) {
-		this.fecha_contratacion = fecha_contratacion;
+	public void setFechacontratacion(Date fechaContratacion) {
+		this.fechaContratacion = fechaContratacion;
 	}
 
 	@Override
 	public String toString() {
-		return "Empleado [dni_usuario=" + getDni_usuario() + ", sueldo=" + sueldo + ", fecha_contratacion="
-				+ fecha_contratacion + "]";
+		return "Empleado [dniusuario=" + getdniUsuario() + ", sueldo=" + sueldo + ", fechaContratacion="
+				+ fechaContratacion + "]";
 	}
 }

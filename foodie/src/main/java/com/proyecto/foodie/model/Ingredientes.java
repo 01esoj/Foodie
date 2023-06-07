@@ -13,13 +13,13 @@ import jakarta.persistence.ManyToOne;
 public class Ingredientes {
 	
 	@Id
-	private int id_ingrediente;
+	private int idIngrediente;
 	
-	private String nombre_ingrediente;
-	private double precio_unitario;
+	private String nombreIngrediente;
+	private double precioUnitario;
 	
 	@ManyToOne
-	@JoinColumn(name="id_ingrediente", insertable = false, updatable = false)
+	@JoinColumn(name="idIngrediente", insertable = false, updatable = false)
 	private Inventario inventario;
 	
 	@ManyToMany(mappedBy="listaIngredientes")
@@ -27,34 +27,34 @@ public class Ingredientes {
 	
 	public Ingredientes() {}
 
-	public Ingredientes(int id_ingrediente, String nombre_ingrediente, double precio_unitario) {
-		this.id_ingrediente = id_ingrediente;
-		this.nombre_ingrediente = nombre_ingrediente;
-		this.precio_unitario = precio_unitario;
+	public Ingredientes(int idIngrediente, String nombreIngrediente, double precioUnitario) {
+		this.idIngrediente = idIngrediente;
+		this.nombreIngrediente = nombreIngrediente;
+		this.precioUnitario = precioUnitario;
 	}
 
-	public int getId_ingrediente() {
-		return id_ingrediente;
+	public int getIdIngrediente() {
+		return idIngrediente;
 	}
 
-	public void setId_ingrediente(int id_ingrediente) {
-		this.id_ingrediente = id_ingrediente;
+	public void setIdIngrediente(int idIngrediente) {
+		this.idIngrediente = idIngrediente;
 	}
 
-	public String getNombre_ingrediente() {
-		return nombre_ingrediente;
+	public String getNombreIngrediente() {
+		return nombreIngrediente;
 	}
 
-	public void setNombre_ingrediente(String nombre_ingrediente) {
-		this.nombre_ingrediente = nombre_ingrediente;
+	public void setNombreIngrediente(String nombreIngrediente) {
+		this.nombreIngrediente = nombreIngrediente;
 	}
 
-	public double getPrecio_unitario() {
-		return precio_unitario;
+	public double getPrecioUnitario() {
+		return precioUnitario;
 	}
 
-	public void setPrecio_unitario(double precio_unitario) {
-		this.precio_unitario = precio_unitario;
+	public void setPrecioUnitario(double precioUnitario) {
+		this.precioUnitario = precioUnitario;
 	}
 	
 	public Inventario getInventario() {
@@ -75,7 +75,7 @@ public class Ingredientes {
 
 	@Override
 	public String toString() {
-		return "Ingredientes [id_ingrediente=" + id_ingrediente + ", nombre_ingrediente=" + nombre_ingrediente
-				+ ", precio_unitario=" + precio_unitario + "]";
+		return "Ingredientes [idIngrediente=" + idIngrediente + ", nombreIngrediente=" + nombreIngrediente
+				+ ", precioUnitario=" + precioUnitario + "]";
 	}
 }

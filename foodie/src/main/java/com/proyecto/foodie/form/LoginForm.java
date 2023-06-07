@@ -2,15 +2,15 @@ package com.proyecto.foodie.form;
 
 public class LoginForm {
 	
-	private String correo_electronico;
+	private String correoElectronico;
 	private String contrasena;
 	
-	public String getCorreo_electronico() {
-		return correo_electronico;
+	public String getCorreoElectronico() {
+		return correoElectronico;
 	}
 	
-	public void setCorreo_electronico(String correo_electronico) {
-		this.correo_electronico = correo_electronico;
+	public void setCorreoElectronico(String correoElectronico) {
+		this.correoElectronico = correoElectronico;
 	}
 	
 	public String getContrasena() {
@@ -25,9 +25,9 @@ public class LoginForm {
 		super();
 	}
 
-	public LoginForm(String correo_electronico, String contrasena) {
+	public LoginForm(String correoElectronico, String contrasena) {
 		super();
-		this.correo_electronico = correo_electronico;
+		this.correoElectronico = correoElectronico;
 		this.contrasena = contrasena;
 	}
 }

@@ -12,11 +12,11 @@ import jakarta.persistence.ManyToOne;
 public class Pedidos {
 	
 	@Id
-	private int numero_pedido;
+	private int numeroPedido;
 	
-	private String direccion_envio;
-	private double precio_total;
-	private String metodo_pago;
+	private String direccionEnvio;
+	private double precioTotal;
+	private String metodoPago;
 	
 	@ManyToOne
 	@JoinColumn(name="dni_cliente")
@@ -27,44 +27,44 @@ public class Pedidos {
 	
 	public Pedidos() {}
 
-	public Pedidos(int numero_pedido, String direccion_envio, double precio_total, String metodo_pago, Cliente cliente) {
-		this.numero_pedido = numero_pedido;
-		this.direccion_envio = direccion_envio;
-		this.precio_total = precio_total;
-		this.metodo_pago = metodo_pago;
+	public Pedidos(int numeroPedido, String direccionEnvio, double precioTotal, String metodoPago, Cliente cliente) {
+		this.numeroPedido = numeroPedido;
+		this.direccionEnvio = direccionEnvio;
+		this.precioTotal = precioTotal;
+		this.metodoPago = metodoPago;
 		this.cliente = cliente;
 	}
 
-	public int getNumero_pedido() {
-		return numero_pedido;
+	public int getNumeroPedido() {
+		return numeroPedido;
 	}
 
-	public void setNumero_pedido(int numero_pedido) {
-		this.numero_pedido = numero_pedido;
+	public void setNumeroPedido(int numeroPedido) {
+		this.numeroPedido = numeroPedido;
 	}
 
-	public String getDireccion_envio() {
-		return direccion_envio;
+	public String getDireccionEnvio() {
+		return direccionEnvio;
 	}
 
-	public void setDireccion_envio(String direccion_envio) {
-		this.direccion_envio = direccion_envio;
+	public void setDireccionEnvio(String direccionEnvio) {
+		this.direccionEnvio = direccionEnvio;
 	}
 
-	public double getPrecio_total() {
-		return precio_total;
+	public double getPrecioTotal() {
+		return precioTotal;
 	}
 
-	public void setPrecio_total(double precio_total) {
-		this.precio_total = precio_total;
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
 	}
 
-	public String getMetodo_pago() {
-		return metodo_pago;
+	public String getMetodoPago() {
+		return metodoPago;
 	}
 
-	public void setMetodo_pago(String metodo_pago) {
-		this.metodo_pago = metodo_pago;
+	public void setMetodoPago(String metodoPago) {
+		this.metodoPago = metodoPago;
 	}
 
 	public Cliente getCliente() {
@@ -85,7 +85,7 @@ public class Pedidos {
 
 	@Override
 	public String toString() {
-		return "Pedidos [numero_pedido=" + numero_pedido + ", direccion_envio=" + direccion_envio + ", precio_total="
-				+ precio_total + ", metodo_pago=" + metodo_pago + ", cliente=" + cliente.getDni_cliente() + "]";
+		return "Pedidos [numeroPedido=" + numeroPedido + ", direccionEnvio=" + direccionEnvio + ", precioTotal="
+				+ precioTotal + ", metodoPago=" + metodoPago + ", cliente=" + cliente.getDniCliente() + "]";
 	}
 }
