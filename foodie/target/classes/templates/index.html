@@ -28,16 +28,15 @@
 				<li><a href="/" class="px-5">Menú</a></li>
 				<li><a href="#" class="px-5">Pedidos</a></li>
 				<li><a href="#" class="px-5">Promociones</a></li>
-				<li th:if="${session.correo != null}"><a href="/profile" class="px-5">Perfil</a></li>
+				<li th:if="${session.id != null}"><a href="/perfil" class="px-5">Perfil</a></li>
 			</ul>
 
 			<div class="col-md-3 text-end">
-				<a th:if="${session.correo != null}" href="/logout" type="button" class="btn btn-outline-primary btn-lg me-2">Cerrar sesión</a>
-		        <a th:if="${session.correo == null}" href="/login" type="button" class="btn btn-outline-primary btn-lg me-2">Iniciar sesión</a>
-		        <a th:if="${session.correo == null}" href="/signup" type="button" class="btn btn-outline-primary btn-lg me-2">Registrarse</a>
+				<a th:if="${session.id != null}" href="/logout" type="button" class="btn btn-outline-primary btn-lg me-2">Cerrar sesión</a>
+		        <a th:if="${session.id == null}" href="/login" type="button" class="btn btn-outline-primary btn-lg me-2">Iniciar sesión</a>
+		        <a th:if="${session.id == null}" href="/signup" type="button" class="btn btn-outline-primary btn-lg me-2">Registrarse</a>
 			</div>
 		</header>
-
 	</div>
 
 	<main>
@@ -76,13 +75,13 @@
 				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 					<div class="col" th:each="plato, iterStat : ${listaPlatos}">
 						<div class="card shadow-sm">
-							<img class="foodie m-3 mb-0" style="border-radius: 8%;" src="static/img/oferta1.jpg" th:src="@{/img/oferta1.jpg}"/>
+							<img class="foodie m-3 mb-0" style="border-radius: 8%;" src="static/img/pizzamargarita.jpg" th:src="@{/img/pizzamargarita.jpg}"/>
 
 							<div class="card-body">
 								<h4 th:text="${plato.nombrePlato}"></h4>
 								<p class="card-text" th:text="${plato.descripcion}"></p>
 								<div class="d-flex justify-content-center align-items-center">
-									<button type="button" class="btn btn-outline-secondary">Añadir por <text th:text="${plato.precioPlato}"></text></button>
+									<button type="button" class="btn btn-outline-secondary">Añadir por <text th:text="${plato.precioPlato}"></text> €</button>
 								</div>
 							</div>
 						</div>

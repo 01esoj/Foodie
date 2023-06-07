@@ -2,6 +2,7 @@ package com.proyecto.foodie.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.foodie.form.LoginForm;
 import com.proyecto.foodie.form.SignupForm;
@@ -63,8 +65,7 @@ public class FoodieController {
 		Cliente loginCliente = clienteRepository.findByCorreoElectronico(loginForm.getCorreoElectronico());
 		
 		if (loginUser != null && loginUser.getContrasena().equals(loginForm.getContrasena())) {
-			session.setAttribute("correo", loginForm.getCorreoElectronico());
-			session.setAttribute("dni", loginUser.getDniUsuario());
+			session.setAttribute("id", loginUser.getIdUsuario());
 //			if(login.getRol().getRol().equalsIgnoreCase("admin")) {
 //				return "admin";
 //			}else{
@@ -74,8 +75,7 @@ public class FoodieController {
 			System.out.println("entras como user");
 			return "redirect:/";
 		} else if (loginCliente != null && loginCliente.getContrasena().equals(loginForm.getContrasena())) {
-			session.setAttribute("correo", loginForm.getCorreoElectronico());
-			session.setAttribute("dni", loginCliente.getDniCliente());
+			session.setAttribute("id", loginCliente.getIdCliente());
 //			if(login.getRol().getRol().equalsIgnoreCase("admin")) {
 //				return "admin";
 //			}else{
@@ -86,7 +86,7 @@ public class FoodieController {
 			return "redirect:/";
 		} else {
 			System.out.println("peta");
-			session.setAttribute("error", "Usuario o contraseña incorrectos");
+			session.setAttribute("error", "Correo o contraseña incorrectos");
 			return "redirect:/login";
 		}
 	}
@@ -117,5 +117,35 @@ public class FoodieController {
 	    HttpSession session = request.getSession();
 	    session.invalidate();
 	    return "redirect:/";
+	}
+	
+	@GetMapping("/perfil")
+	public String perfil(SignupForm signupForm, HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		Cliente cliente = clienteRepository.findById((Integer) session.getAttribute("id")).orElse(null);
+		
+		System.out.println("patata" + cliente.toString());
+		model.addAttribute("cliente", cliente);
+		return "perfil";
+	}
+	
+	@PostMapping(path="/actualizarPerfil")
+	public String actualizarPerfil(@ModelAttribute("signupForm") @Valid SignupForm signupForm, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
+		HttpSession session = request.getSession();
+		
+		Cliente cliente = clienteRepository.findById((Integer) session.getAttribute("id")).orElse(null);
+		
+		cliente.setNombreCliente(signupForm.getNombreCliente());
+        cliente.setApellidosCliente(signupForm.getApellidosCliente());
+        cliente.setTelefonoCliente(signupForm.getTelefonoCliente());
+        cliente.setCorreoElectronico(signupForm.getCorreoElectronico());
+        cliente.setContrasena(signupForm.getContrasena());
+        cliente.setTarjetaCredito(signupForm.getTarjetaCredito());
+        
+		clienteRepository.save(cliente);
+		
+		redirectAttributes.addFlashAttribute("mensaje", "Los cambios se guardaron correctamente.");
+		model.addAttribute("loginForm", new LoginForm());
+	    return "redirect:/perfil";
 	}
 }

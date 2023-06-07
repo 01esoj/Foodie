@@ -4,6 +4,8 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
@@ -11,7 +13,8 @@ import jakarta.persistence.OneToMany;
 public class Inventario {
 	
 	@Id
-	private int idIngrediente;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer idInventario;
 	
 	private int cantidad;
 	private double precioCompra;
@@ -22,19 +25,18 @@ public class Inventario {
 	
 	public Inventario() {}
 
-	public Inventario(int idIngrediente, int cantidad, double precioCompra, String proveedor) {
-		this.idIngrediente = idIngrediente;
+	public Inventario(int cantidad, double precioCompra, String proveedor) {
 		this.cantidad = cantidad;
 		this.precioCompra = precioCompra;
 		this.proveedor = proveedor;
 	}
 
-	public int getIdIngrediente() {
-		return idIngrediente;
+	public Integer getIdInventario() {
+		return idInventario;
 	}
 
-	public void setIdIngrediente(int idIngrediente) {
-		this.idIngrediente = idIngrediente;
+	public void setIdInventario(Integer idInventario) {
+		this.idInventario = idInventario;
 	}
 
 	public int getCantidad() {
@@ -71,7 +73,7 @@ public class Inventario {
 
 	@Override
 	public String toString() {
-		return "Inventario [idIngrediente=" + idIngrediente + ", cantidad=" + cantidad + ", precioCompra="
+		return "Inventario [idInventario=" + idInventario + ", cantidad=" + cantidad + ", precioCompra="
 				+ precioCompra + ", proveedor=" + proveedor + "]";
 	}
 }
