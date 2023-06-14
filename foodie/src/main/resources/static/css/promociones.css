@@ -27,15 +27,6 @@ li a:hover {
     color: white;
 }
 
-.carousel-caption {
-	bottom: 4rem;
-	z-index: 10;
-}
-
-.carousel-item {
-	height: 27rem;
-}
-
 .btn-secondary {
 	background-color: white;
 }
@@ -64,7 +55,7 @@ li a:hover {
     justify-content: center;
     font-size: 12px;
 }
-  
+
 .bi {
 	fill: orange;
 	background-color: white;
@@ -111,30 +102,6 @@ li a:hover {
 	transform: skew(20deg, 0deg) scale(1.2);
 }
 
-.oferta1 {
-	background-image: url('/img/oferta1.jpg');
-	background-size: cover;
-	background-position: center;
-	height: 100%;
-}
-
-.oferta2 {
-	background-image: url('/img/oferta2.jpg');
-	background-size: cover;
-	background-position: center;
-	height: 100%;
-}
-
-.section {
-	border: none;
-	background-color: orange;
-}
-
-.section:hover {
-	border: none;
-	background-color: darkorange;
-}
-
 .search-input {
 	width: 500px; /* Ajusta el ancho según tus necesidades */
 	height: 50px; /* Ajusta la altura según tus necesidades */
@@ -149,45 +116,4 @@ li a:hover {
 
 .card-body h4 {
 	font-weight: bold;
-}
-
-.btn-outline-secondary:hover {
-	background-color: orange;
-	color: white;
-}
-
-.popup {
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	background-color: white;
-	padding: 20px;
-	border-radius: 5px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-	z-index: 9999;
-}
-
-.popup>h3 {
-	margin-top: 30px;	
-}
-
-.close-btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	font-weight: bold;
-	font-size: 16px;
-	padding: 5px 10px;
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
-
-@media ( min-width : 40em) {
-	.carousel-caption p {
-		margin-bottom: 1.25rem;
-		font-size: 1.25rem;
-		line-height: 1.4;
-	}
 }

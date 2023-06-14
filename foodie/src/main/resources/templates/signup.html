@@ -29,6 +29,7 @@
                     <div class="mt-3 form-group" id="user-group">
                         <input type="text" th:field="*{dniCliente}" class="form-control" placeholder="DNI" name="dni"/>
                         <div th:if="${#fields.hasErrors('dniCliente')}" th:errors="*{dniCliente}" class="text-danger"></div>
+                        <div th:if="${errordni}" th:text="${errordni}" class="text-danger"></div>
                     </div>
                     <div class="mt-3 form-group" id="user-group">
                         <input type="text" th:field="*{nombreCliente}" class="form-control" placeholder="Nombre" name="nombreCliente"/>
@@ -41,10 +42,12 @@
                     <div class="mt-3 form-group" id="number-group">
 					    <input type="text" th:field="*{telefonoCliente}" class="form-control" placeholder="Teléfono" name="telefono"/>
 					    <div th:if="${#fields.hasErrors('telefonoCliente')}" th:errors="*{telefonoCliente}" class="text-danger"></div>
+					    <div th:if="${errortelefono}" th:text="${errortelefono}" class="text-danger"></div>
 					</div>
                     <div class="mt-3 form-group" id="email-group">
 					    <input type="text" th:field="*{correoElectronico}" class="form-control" placeholder="Correo Electrónico" name="correo"/>
 					    <div th:if="${#fields.hasErrors('correoElectronico')}" th:errors="*{correoElectronico}" class="text-danger"></div>
+					    <div th:if="${erroremail}" th:text="${erroremail}" class="text-danger"></div>
 					</div>
                     <div class="mt-3 form-group" id="password-group">
 					    <input type="password" th:field="*{contrasena}" class="form-control" placeholder="Contraseña" name="contrasena"/>
@@ -53,6 +56,7 @@
                     <div class="mt-3 form-group" id="card-group">
 					    <input type="text" th:field="*{tarjetaCredito}" class="form-control" placeholder="Tarjeta de Crédito" name="tarjetaCredito"/>
 					    <div th:if="${#fields.hasErrors('tarjetaCredito')}" th:errors="*{tarjetaCredito}" class="text-danger"></div>
+					    <div th:if="${errortarjeta}" th:text="${errortarjeta}" class="text-danger"></div>
 					</div>
                     <button id="crear" type="submit" class="mt-4 btn btn-primary">Crear</button>
                     <a href="/" id="volver" type="button" class="mt-4 btn btn-primary">Volver</a>
