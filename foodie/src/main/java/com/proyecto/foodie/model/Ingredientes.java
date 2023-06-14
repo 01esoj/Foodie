@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Ingredientes {
@@ -18,11 +19,13 @@ public class Ingredientes {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idIngrediente;
 	
+	@NotNull
 	private String nombreIngrediente;
+	@NotNull
 	private double precioUnitario;
 	
 	@ManyToOne
-	@JoinColumn(name="idIngrediente", insertable = false, updatable = false)
+	@JoinColumn(name="idInventario", insertable = false, updatable = false)
 	private Inventario inventario;
 	
 	@ManyToMany(mappedBy="listaIngredientes")

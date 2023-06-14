@@ -2,7 +2,9 @@ package com.proyecto.foodie.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,26 +13,34 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipoUsuario")
 public class Usuarios {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idUsuario;
 	
+	@NotNull
 	@Column(unique=true)
 	private String dniUsuario;
+	@NotNull
 	private String nombreUsuario;
 	private String apellidosUsuario;
+	@NotNull
 	@Column(unique=true)
 	private int telefonoUsuario;
+	@NotNull
 	@Column(unique=true)
 	private String correoElectronico;
 	private String contrasena;
+	@Column(insertable=false, updatable=false)
 	private String tipoUsuario;
-	
+    
 	@ManyToMany(mappedBy="listaUsuarios")
 	private List<Platos> listaPlatos;
 	

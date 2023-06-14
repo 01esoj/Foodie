@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Cliente {
@@ -16,15 +17,20 @@ public class Cliente {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idCliente;
 	
+	@NotNull
 	@Column(unique=true)
 	private String dniCliente;
 	
+	@NotNull
 	private String nombreCliente;
 	private String apellidosCliente;
+	@NotNull
 	@Column(unique=true)
 	private int telefonoCliente;
+	@NotNull
 	@Column(unique=true)
 	private String correoElectronico;
+	@NotNull
 	private String contrasena;
 	@Column(unique=true)
 	private Long tarjetaCredito;

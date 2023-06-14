@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Platos {
@@ -18,16 +19,16 @@ public class Platos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idPlato;
 	
+	@NotNull
 	private String nombrePlato;
+	@NotNull
 	private double precioPlato;
+	@NotNull
 	private String categoria;
 	private String descripcion;
+	private String imagen;
 	
-	@JoinTable(
-			name="rel_platos_pedidos", 
-			joinColumns = @JoinColumn(name="idPlato", nullable=false), 
-			inverseJoinColumns = @JoinColumn(name="numeroPedido", nullable = false))
-	@ManyToMany(cascade = CascadeType.MERGE)
+	@ManyToMany(mappedBy="listaPedidos", cascade = CascadeType.PERSIST)
 	private List<Pedidos> listaPedidos;
 	
 	@JoinTable(
@@ -46,11 +47,12 @@ public class Platos {
 	
 	public Platos() {}
 	
-	public Platos(String nombrePlato, double precioPlato, String categoria, String descripcion) {
+	public Platos(String nombrePlato, double precioPlato, String categoria, String descripcion, String imagen) {
 		this.nombrePlato = nombrePlato;
 		this.precioPlato = precioPlato;
 		this.categoria = categoria;
 		this.descripcion = descripcion;
+		this.imagen = imagen;
 	}
 
 	public Integer getIdPlato() {
@@ -115,6 +117,14 @@ public class Platos {
 
 	public void setListaIngredientes(List<Ingredientes> listaIngredientes) {
 		this.listaIngredientes = listaIngredientes;
+	}
+	
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override

@@ -1,20 +1,33 @@
 package com.proyecto.foodie.form;
 
-import jakarta.persistence.Column;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 public class SignupForm {
 	
+	@NotNull
+	@Size(min = 9, max = 9, message = "El dni debe tener 9 caracteres")
 	private String dniCliente;
+	@NotNull
+	@Size(min = 3, max = 20, message = "El nombre de cliente debe tener entre 3 y 20 caracteres")
 	private String nombreCliente;
 	private String apellidosCliente;
-	private int telefonoCliente;
+	@NotNull
+	@Pattern(regexp = "6\\d{8}", message = "El teléfono debe tener 9 dígitos y comenzar por 6")
+	private String telefonoCliente;
+	@NotNull
+	@Email(message = "El correo no puede ser nulo")
 	private String correoElectronico;
+	@NotNull
+	@Size(min = 4, max = 30, message = "La contraseña debe tener entre 4 y 30 caracteres")
 	private String contrasena;
 	private Long tarjetaCredito;
 	
 	public SignupForm() {}
 
-	public SignupForm(String dniCliente, String nombreCliente, String apellidosCliente, int telefonoCliente,
+	public SignupForm(String dniCliente, String nombreCliente, String apellidosCliente, String telefonoCliente,
 			String correoElectronico, String contrasena, Long tarjetaCredito) {
 		this.dniCliente = dniCliente;
 		this.nombreCliente = nombreCliente;
@@ -49,11 +62,11 @@ public class SignupForm {
 		this.apellidosCliente = apellidosCliente;
 	}
 
-	public int getTelefonoCliente() {
+	public String getTelefonoCliente() {
 		return telefonoCliente;
 	}
 
-	public void setTelefonoCliente(int telefonoCliente) {
+	public void setTelefonoCliente(String telefonoCliente) {
 		this.telefonoCliente = telefonoCliente;
 	}
 

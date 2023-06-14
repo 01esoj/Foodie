@@ -2,13 +2,16 @@ package com.proyecto.foodie.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Pedidos {
@@ -17,6 +20,7 @@ public class Pedidos {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer numeroPedido;
 	
+	@NotNull
 	private String direccionEnvio;
 	private double precioTotal;
 	private String metodoPago;
@@ -25,16 +29,28 @@ public class Pedidos {
 	@JoinColumn(name="dni_cliente")
 	private Cliente cliente;
 	
-	@ManyToMany(mappedBy="listaPedidos")
-	private List<Platos> listaPlatos;
+	@ManyToMany(cascade = CascadeType.PERSIST)
+	@JoinTable(
+			name="rel_platos_pedidos", 
+			joinColumns = @JoinColumn(name="numeroPedido", nullable=false), 
+			inverseJoinColumns = @JoinColumn(name="idPlato", nullable = false))
+	private List<Platos> listaPedidos;
 	
 	public Pedidos() {}
-
-	public Pedidos(String direccionEnvio, double precioTotal, String metodoPago, Cliente cliente) {
+	
+	public Pedidos(String direccionEnvio, double precioTotal, String metodoPago, List<Platos> listaPlatos) {
+		this.direccionEnvio = direccionEnvio;
+		this.precioTotal = precioTotal;
+		this.metodoPago = metodoPago;
+		this.listaPedidos = listaPlatos;
+	}
+	
+	public Pedidos(String direccionEnvio, double precioTotal, String metodoPago, Cliente cliente, List<Platos> listaPlatos) {
 		this.direccionEnvio = direccionEnvio;
 		this.precioTotal = precioTotal;
 		this.metodoPago = metodoPago;
 		this.cliente = cliente;
+		this.listaPedidos = listaPlatos;
 	}
 
 	public Integer getNumeroPedido() {
@@ -78,11 +94,11 @@ public class Pedidos {
 	}
 
 	public List<Platos> getListaPlatos() {
-		return listaPlatos;
+		return listaPedidos;
 	}
 
 	public void setListaPlatos(List<Platos> listaPlatos) {
-		this.listaPlatos = listaPlatos;
+		this.listaPedidos = listaPlatos;
 	}
 
 	@Override

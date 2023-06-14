@@ -11,10 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.foodie.form.LoginForm;
 import com.proyecto.foodie.form.SignupForm;
+import com.proyecto.foodie.model.Cesta;
 import com.proyecto.foodie.model.Cliente;
 import com.proyecto.foodie.model.Platos;
 import com.proyecto.foodie.model.Usuarios;
@@ -40,14 +42,40 @@ public class FoodieController {
 	@Autowired
 	private PlatosRepository platosRepository;
 	
+	@Autowired
+	private Cesta cesta;
+	
+	@GetMapping("/error")
+	public String handleError() {
+		return "error";
+	}
+	
 	@GetMapping("/")
 	public String index(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
-		Iterable<Platos> itPlatos = platosRepository.findAll();
-	    List<Platos> listaPlatos = new ArrayList<>();
-	    itPlatos.forEach(listaPlatos::add);
-	    model.addAttribute("listaPlatos", listaPlatos);
+		Iterable<Platos> itPlatosPrincipales = platosRepository.findByCategoria("Principal");
+	    List<Platos> listaPlatosPrincipales = new ArrayList<>();
+	    itPlatosPrincipales.forEach(listaPlatosPrincipales::add);
+	    model.addAttribute("listaPlatosPrincipales", listaPlatosPrincipales);
+	    
+	    Iterable<Platos> itPlatosEntrantes = platosRepository.findByCategoria("Entrante");
+	    List<Platos> listaPlatosEntrantes = new ArrayList<>();
+	    itPlatosEntrantes.forEach(listaPlatosEntrantes::add);
+	    model.addAttribute("listaPlatosEntrantes", listaPlatosEntrantes);
+	    
+	    Iterable<Platos> itPlatosBebidas = platosRepository.findByCategoria("Bebida");
+	    List<Platos> listaPlatosBebidas = new ArrayList<>();
+	    itPlatosBebidas.forEach(listaPlatosBebidas::add);
+	    model.addAttribute("listaPlatosBebidas", listaPlatosBebidas);
+	    
+	    Iterable<Platos> itPlatosPostres = platosRepository.findByCategoria("Postre");
+	    List<Platos> listaPlatosPostres = new ArrayList<>();
+	    itPlatosPostres.forEach(listaPlatosPostres::add);
+	    model.addAttribute("listaPlatosPostres", listaPlatosPostres);
+	    
+	    int carrito = cesta.getPlatos().size();
+	    session.setAttribute("carrito", carrito);
 	    
 		return "index";
 	}
@@ -57,35 +85,27 @@ public class FoodieController {
 		return "login";
 	}
 	
-	@PostMapping(path="/login")
+	@PostMapping("/login")
 	public String checkLoginInfo(@ModelAttribute("loginForm") LoginForm loginForm, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		
 		Usuarios loginUser = usuariosRepository.findByCorreoElectronico(loginForm.getCorreoElectronico());
 		Cliente loginCliente = clienteRepository.findByCorreoElectronico(loginForm.getCorreoElectronico());
 		
+		if(loginForm.getCorreoElectronico().equals("admin") || (loginForm.getContrasena().equals("admin"))) {
+			session.setAttribute("usuario", "ADMIN");
+			return "redirect:/admin/indexAdmin";
+		}
+		
 		if (loginUser != null && loginUser.getContrasena().equals(loginForm.getContrasena())) {
 			session.setAttribute("id", loginUser.getIdUsuario());
-//			if(login.getRol().getRol().equalsIgnoreCase("admin")) {
-//				return "admin";
-//			}else{
-//				return "user";
-//			}
-//			
-			System.out.println("entras como user");
+			session.setAttribute("nombre", loginUser.getNombreUsuario());
 			return "redirect:/";
 		} else if (loginCliente != null && loginCliente.getContrasena().equals(loginForm.getContrasena())) {
 			session.setAttribute("id", loginCliente.getIdCliente());
-//			if(login.getRol().getRol().equalsIgnoreCase("admin")) {
-//				return "admin";
-//			}else{
-//				return "user";
-//			}
-//			
-			System.out.println("entras como cliente");
+			session.setAttribute("nombre", loginCliente.getNombreCliente());
 			return "redirect:/";
 		} else {
-			System.out.println("peta");
 			session.setAttribute("error", "Correo o contraseña incorrectos");
 			return "redirect:/login";
 		}
@@ -96,7 +116,7 @@ public class FoodieController {
 		return "signup";
 	}
 	
-	@PostMapping(path="/signup")
+	@PostMapping("/signup")
 	public String checkSignupInfo(@ModelAttribute("signupForm") @Valid SignupForm signupForm, BindingResult bindingResult, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		
@@ -104,10 +124,29 @@ public class FoodieController {
 	        return "signup";
 	    }
 		
-		Cliente cliente = new Cliente(signupForm.getDniCliente(), signupForm.getNombreCliente(), signupForm.getApellidosCliente(), signupForm.getTelefonoCliente(), signupForm.getCorreoElectronico(), signupForm.getContrasena(), signupForm.getTarjetaCredito());
+		if (clienteRepository.existsByDniCliente(signupForm.getDniCliente())) {
+            model.addAttribute("errordni", "Ese DNI ya existe");
+            return "signup";
+        }
+
+        if (clienteRepository.existsByTelefonoCliente(signupForm.getTelefonoCliente())) {
+        	model.addAttribute("errortelefono", "Ese teléfono ya existe");
+        	return "signup";
+        }
+
+        if (clienteRepository.existsByCorreoElectronico(signupForm.getCorreoElectronico())) {
+        	model.addAttribute("erroremail", "Ese email ya existe");
+        	return "signup";
+        }
+        
+        if (clienteRepository.existsByTarjetaCredito(signupForm.getTarjetaCredito())) {
+        	model.addAttribute("errortarjeta", "Esa tarjeta de crédito ya existe");
+        	return "signup";
+        }
+        
+		Cliente cliente = new Cliente(signupForm.getDniCliente(), signupForm.getNombreCliente(), signupForm.getApellidosCliente(), Integer.parseInt(signupForm.getTelefonoCliente()), signupForm.getCorreoElectronico(), signupForm.getContrasena(), signupForm.getTarjetaCredito());
 		clienteRepository.save(cliente);
 		
-		model.addAttribute("loginForm", new LoginForm());
 	    session.setAttribute("cuenta", "Cuenta creada éxitosamente");
 	    return "redirect:/login";
 	}
@@ -119,33 +158,14 @@ public class FoodieController {
 	    return "redirect:/";
 	}
 	
-	@GetMapping("/perfil")
-	public String perfil(SignupForm signupForm, HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
-		Cliente cliente = clienteRepository.findById((Integer) session.getAttribute("id")).orElse(null);
+	@GetMapping("/promociones")
+	public String promociones(Model model, HttpServletRequest request) {
 		
-		System.out.println("patata" + cliente.toString());
-		model.addAttribute("cliente", cliente);
-		return "perfil";
-	}
-	
-	@PostMapping(path="/actualizarPerfil")
-	public String actualizarPerfil(@ModelAttribute("signupForm") @Valid SignupForm signupForm, HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) {
-		HttpSession session = request.getSession();
-		
-		Cliente cliente = clienteRepository.findById((Integer) session.getAttribute("id")).orElse(null);
-		
-		cliente.setNombreCliente(signupForm.getNombreCliente());
-        cliente.setApellidosCliente(signupForm.getApellidosCliente());
-        cliente.setTelefonoCliente(signupForm.getTelefonoCliente());
-        cliente.setCorreoElectronico(signupForm.getCorreoElectronico());
-        cliente.setContrasena(signupForm.getContrasena());
-        cliente.setTarjetaCredito(signupForm.getTarjetaCredito());
-        
-		clienteRepository.save(cliente);
-		
-		redirectAttributes.addFlashAttribute("mensaje", "Los cambios se guardaron correctamente.");
-		model.addAttribute("loginForm", new LoginForm());
-	    return "redirect:/perfil";
+		Iterable<Platos> itPlatos = platosRepository.findByCategoria("Promocion");
+	    List<Platos> listaPlatos = new ArrayList<>();
+	    itPlatos.forEach(listaPlatos::add);
+	    model.addAttribute("listaPlatos", listaPlatos);
+	    
+		return "promociones";
 	}
 }
